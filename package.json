@@ -1,0 +1,27 @@
+{
+  "name": "video-player",
+  "version": "1.0.0",
+  "description": "Library for adding videos on your web pages",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anmisttt/video-player.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anmisttt/video-player.js/issues"
+  },
+  "homepage": "https://github.com/anmisttt/video-player.js#readme"
+}

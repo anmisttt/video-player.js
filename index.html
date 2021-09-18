@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/style.css" rel="stylesheet"/>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Bla bla</h1>
+    <div class='video-container'>
+        <video class='video-player' id='video-player'>
+             <source src="videos/video.mp4" type="video/mp4"></source>
+        </video>
+        <div class='video-controls__element video-controls__action play main' id='video-controls__action'></div>
+        <div class='video-controls'>
+        <div class='video-controls__element video-controls__action play' id='video-controls__action'></div>
+        <div class='video-controls__element video-controls__curr-time' id='video-controls__curr-time'>00:00</div>
+        <progress value='0' max='100' class='video-controls__element video-controls__progress-bar' id='video-controls__progress-bar'></progress>
+        <div class='video-controls__element video-controls__duration' id='video-controls__duration'>00:00</div>
+        <div class='video-controls__element video-controls__mute video-controls__mute_false' id='video-controls__mute'>
+            <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
+<g>
+	<g>
+		<path d="M278.944,17.577c-5.568-2.656-12.128-1.952-16.928,1.92L106.368,144.009H32c-17.632,0-32,14.368-32,32v128
+			c0,17.632,14.368,32,32,32h74.368l155.616,124.512c2.912,2.304,6.464,3.488,10.016,3.488c2.368,0,4.736-0.512,6.944-1.568
+			c5.536-2.688,9.056-8.288,9.056-14.432v-416C288,25.865,284.48,20.265,278.944,17.577z M96,304.009H32v-128h64V304.009z
+			 M256,414.697l-128-102.4V167.721l128-102.4V414.697z" fill="#fefefe"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M369.024,126.857c-6.304-6.24-16.416-6.144-22.624,0.128c-6.208,6.304-6.144,16.416,0.128,22.624
+			c24.16,23.904,37.472,56,37.472,90.4c0,34.4-13.312,66.496-37.472,90.4c-6.304,6.208-6.368,16.32-0.128,22.624
+			c3.136,3.168,7.264,4.736,11.36,4.736c4.064,0,8.128-1.536,11.264-4.64c30.304-29.92,46.976-70.08,46.976-113.12
+			C416,196.969,399.328,156.809,369.024,126.857z" fill="#fefefe"/>
+	</g>
+</g>
+<g>
+	<g>
+		<path d="M414.144,81.769c-6.272-6.208-16.416-6.176-22.624,0.096c-6.208,6.272-6.176,16.416,0.096,22.624
+			C427.968,140.553,448,188.681,448,240.009s-20.032,99.456-56.384,135.52c-6.272,6.208-6.304,16.352-0.096,22.624
+			c3.136,3.168,7.232,4.736,11.36,4.736c4.064,0,8.128-1.536,11.264-4.64C456.608,356.137,480,299.945,480,240.009
+			C480,180.073,456.608,123.881,414.144,81.769z" fill="#fefefe"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
+        </div>
+        <input type='range' value='100' max='100' title='Громкость' class='video-controls__element video-controls__volume' id='video-controls__volume'>
+        <select title='Скорость' class='video-controls__element video-controls__speed' id='video-controls__speed'>
+        <option value='25'>x0.25</option>
+        <option value='50'>x0.50</option>
+        <option value='75'>x0.75</option>
+        <option value='100' selected>x1.00</option>
+        <option value='125'>x1.25</option>
+        <option value='150'>x1.50</option>
+        <option value='175'>x1.75</option>
+        <option value='200'>x2.00</option>
+        </select>
+        <select title='Качество' class='video-controls__element video-controls__quality' id='video-controls__quality'>
+        <option value='1080' selected>1080p</option>
+        <option value='360'>360px</option>
+        </select>
+        <a class='video-controls__element video-controls__download' title='Скачать' href='video.mp4' download>
+            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#fefefe"><g id="Solid"><path d="m239.029 384.97a24 24 0 0 0 33.942 0l90.509-90.509a24 24 0 0 0 0-33.941 24 24 0 0 0 -33.941 0l-49.539 49.539v-262.059a24 24 0 0 0 -48 0v262.059l-49.539-49.539a24 24 0 0 0 -33.941 0 24 24 0 0 0 0 33.941z"/><path d="m464 232a24 24 0 0 0 -24 24v184h-368v-184a24 24 0 0 0 -48 0v192a40 40 0 0 0 40 40h384a40 40 0 0 0 40-40v-192a24 24 0 0 0 -24-24z" fill="#fefefe"/></g></svg>
+        </a>
+        <div class="video-controls__element video-controls__full-screen" id="video-controls__full-screen">
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+        </div>
+        </div>
+        </div>
+        <script src="index.js"></script>
+
+</body>
+</html>
