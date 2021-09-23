@@ -1,5 +1,7 @@
 .video-block {
-    padding: 3% 10%
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 }
 h1 {
     margin: 5% auto 2%;
