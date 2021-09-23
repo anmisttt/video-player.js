@@ -2,7 +2,7 @@
   "name": "video-player",
   "version": "1.0.0",
   "description": "Library for adding videos on your web pages",
-  "main": "index.js",
+  "main": "yandex.js",
   "dependencies": {},
   "devDependencies": {
     "eslint": "^7.32.0",

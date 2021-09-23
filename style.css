@@ -1,0 +1,18 @@
+.video-block {
+    padding: 3% 10%
+}
+h1 {
+    margin: 5% auto 2%;
+    text-align: center;
+    width: 550px;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: normal;
+}
+.gh-btn {
+    width: 40px;
+    height: 40px;
+    margin-left: calc(50% - 20px);
+}
+.gh-btn svg {
+    width: 40px;
+}

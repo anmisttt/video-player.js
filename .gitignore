@@ -9,5 +9,3 @@ node_modules/
 .eslintcache
 .eslintrc.json
 *.sass
-*.mp4
-*.webm

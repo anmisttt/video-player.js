@@ -4,109 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"/>
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Плеер video-player.js</title>
 </head>
 <body>
-    <h1>Bla bla</h1>
-    <div class='video-container'>
-        <video class='video-player' id='video-player'>
-             <source src="videos/video.mp4" type="video/mp4"></source>
+    <h1>Вы можете ознакомиться с тем, как работает video-player.js, на примере трейлера фильма "Дюна"</h1>
+    <a href="https://github.com/anmisttt/video-player.js" class="gh-btn">
+        <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-140.609375 0-256 115.390625-256 256 0 119.988281 84.195312 228.984375 196 256v-84.695312c-11.078125 2.425781-21.273438 2.496093-32.550781-.828126-15.128907-4.464843-27.421875-14.542968-36.546875-29.910156-5.816406-9.8125-16.125-20.453125-26.878906-19.671875l-2.636719-29.882812c23.253906-1.992188 43.371093 14.167969 55.3125 34.230469 5.304687 8.921874 11.410156 14.152343 19.246093 16.464843 7.574219 2.230469 15.707032 1.160157 25.183594-2.1875 2.378906-18.972656 11.070313-26.074219 17.636719-36.074219v-.015624c-66.679687-9.945313-93.253906-45.320313-103.800781-73.242188-13.976563-37.074219-6.476563-83.390625 18.238281-112.660156.480469-.570313 1.347656-2.0625 1.011719-3.105469-11.332032-34.230469 2.476562-62.546875 2.984375-65.550781 13.078125 3.867187 15.203125-3.890625 56.808593 21.386718l7.191407 4.320313c3.007812 1.792969 2.0625.769531 5.070312.542969 17.371094-4.71875 35.683594-7.324219 53.726563-7.558594 18.179687.234375 36.375 2.839844 54.464844 7.75l2.328124.234375c-.203124-.03125.632813-.148437 2.035157-.984375 51.972656-31.480469 50.105469-21.191406 64.042969-25.722656.503906 3.007812 14.128906 31.785156 2.917968 65.582031-1.511718 4.65625 45.058594 47.300781 19.246094 115.753906-10.546875 27.933594-37.117188 63.308594-103.796875 73.253907v.015624c8.546875 13.027344 18.816406 19.957032 18.761719 46.832032v105.722656c111.808594-27.015625 196-136.011719 196-256 .003906-140.609375-115.386719-256-255.996094-256zm0 0"/></svg>    
+    </a>
+    <div class="video-block">
+        <video class='video-player' id='video-player' poster="images/dune.jpg">
+            <source src="videos/720/dune720.mp4" type="video/mp4"></source>
+            <source src="videos/360/dune360.mp4" type="video/webm"></source>
         </video>
-        <div class='video-controls__element video-controls__action play main' id='video-controls__action'></div>
-        <div class='video-controls'>
-        <div class='video-controls__element video-controls__action play' id='video-controls__action'></div>
-        <div class='video-controls__element video-controls__curr-time' id='video-controls__curr-time'>00:00</div>
-        <progress value='0' max='100' class='video-controls__element video-controls__progress-bar' id='video-controls__progress-bar'></progress>
-        <div class='video-controls__element video-controls__duration' id='video-controls__duration'>00:00</div>
-        <div class='video-controls__element video-controls__mute video-controls__mute_false' id='video-controls__mute'>
-            <?xml version="1.0" encoding="iso-8859-1"?>
-<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 480 480" style="enable-background:new 0 0 480 480;" xml:space="preserve">
-<g>
-	<g>
-		<path d="M278.944,17.577c-5.568-2.656-12.128-1.952-16.928,1.92L106.368,144.009H32c-17.632,0-32,14.368-32,32v128
-			c0,17.632,14.368,32,32,32h74.368l155.616,124.512c2.912,2.304,6.464,3.488,10.016,3.488c2.368,0,4.736-0.512,6.944-1.568
-			c5.536-2.688,9.056-8.288,9.056-14.432v-416C288,25.865,284.48,20.265,278.944,17.577z M96,304.009H32v-128h64V304.009z
-			 M256,414.697l-128-102.4V167.721l128-102.4V414.697z" fill="#fefefe"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M369.024,126.857c-6.304-6.24-16.416-6.144-22.624,0.128c-6.208,6.304-6.144,16.416,0.128,22.624
-			c24.16,23.904,37.472,56,37.472,90.4c0,34.4-13.312,66.496-37.472,90.4c-6.304,6.208-6.368,16.32-0.128,22.624
-			c3.136,3.168,7.264,4.736,11.36,4.736c4.064,0,8.128-1.536,11.264-4.64c30.304-29.92,46.976-70.08,46.976-113.12
-			C416,196.969,399.328,156.809,369.024,126.857z" fill="#fefefe"/>
-	</g>
-</g>
-<g>
-	<g>
-		<path d="M414.144,81.769c-6.272-6.208-16.416-6.176-22.624,0.096c-6.208,6.272-6.176,16.416,0.096,22.624
-			C427.968,140.553,448,188.681,448,240.009s-20.032,99.456-56.384,135.52c-6.272,6.208-6.304,16.352-0.096,22.624
-			c3.136,3.168,7.232,4.736,11.36,4.736c4.064,0,8.128-1.536,11.264-4.64C456.608,356.137,480,299.945,480,240.009
-			C480,180.073,456.608,123.881,414.144,81.769z" fill="#fefefe"/>
-	</g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-<g>
-</g>
-</svg>
-        </div>
-        <input type='range' value='100' max='100' title='Громкость' class='video-controls__element video-controls__volume' id='video-controls__volume'>
-        <select title='Скорость' class='video-controls__element video-controls__speed' id='video-controls__speed'>
-        <option value='25'>x0.25</option>
-        <option value='50'>x0.50</option>
-        <option value='75'>x0.75</option>
-        <option value='100' selected>x1.00</option>
-        <option value='125'>x1.25</option>
-        <option value='150'>x1.50</option>
-        <option value='175'>x1.75</option>
-        <option value='200'>x2.00</option>
-        </select>
-        <select title='Качество' class='video-controls__element video-controls__quality' id='video-controls__quality'>
-        <option value='1080' selected>1080p</option>
-        <option value='360'>360px</option>
-        </select>
-        <a class='video-controls__element video-controls__download' title='Скачать' href='video.mp4' download>
-            <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="#fefefe"><g id="Solid"><path d="m239.029 384.97a24 24 0 0 0 33.942 0l90.509-90.509a24 24 0 0 0 0-33.941 24 24 0 0 0 -33.941 0l-49.539 49.539v-262.059a24 24 0 0 0 -48 0v262.059l-49.539-49.539a24 24 0 0 0 -33.941 0 24 24 0 0 0 0 33.941z"/><path d="m464 232a24 24 0 0 0 -24 24v184h-368v-184a24 24 0 0 0 -48 0v192a40 40 0 0 0 40 40h384a40 40 0 0 0 40-40v-192a24 24 0 0 0 -24-24z" fill="#fefefe"/></g></svg>
-        </a>
-        <div class="video-controls__element video-controls__full-screen" id="video-controls__full-screen">
-            <div class="arrow"></div>
-            <div class="arrow"></div>
-            <div class="arrow"></div>
-            <div class="arrow"></div>
-        </div>
-        </div>
-        </div>
-        <script src="index.js"></script>
-
+    </div>
+    
+    
+    <script src="index.js"></script>
 </body>
 </html>
