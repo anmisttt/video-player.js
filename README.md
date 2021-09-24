@@ -31,8 +31,12 @@
 
 ```html
 <video class='video-player' id='video-player' poster="images/dune.jpg" width="700">
-            <source src="videos/720/dune720.mp4" type="video/mp4"></source>
-            <source src="videos/360/dune360.mp4" type="video/mp4"></source>
+            <source src="videos/720/dune.mp4" type="video/mp4"></source>
+            <source src="videos/720/dune.webm" type="video/webm"></source>
+            <source src="videos/720/dune.ogg" type="video/ogg"></source>
+            <source src="videos/360/dune.mp4" type="video/mp4"></source>
+            <source src="videos/360/dune.webm" type="video/webm"></source>
+            <source src="videos/360/dune.ogg" type="video/ogg"></source>
  </video>
 ```
 
