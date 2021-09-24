@@ -1,6 +1,4 @@
 window.onload = function () {
-  const userVideoPlayers = document.querySelectorAll('.video-player')
-
   function createCustomVideoPlayer (userVideoPlayer) {
     const parentElement = userVideoPlayer.parentElement
     const sources = userVideoPlayer.querySelectorAll('source')
@@ -175,9 +173,6 @@ window.onload = function () {
       }
     }
 
-    actionButtons.forEach(x => x.addEventListener('click', videoAct))
-    videoPlayer.addEventListener('click', videoAct)
-
     function getOffsetLeft (elem) {
       let left = 0
 
@@ -209,15 +204,13 @@ window.onload = function () {
       progressBar.value = progress
       currTime.innerHTML = videoTime(videoPlayer.currentTime)
     }
+
     function videoChangeTime (e) {
       const mouseX = Math.floor(e.pageX - getOffsetLeft(progressBar))
       console.log(getOffsetLeft(progressBar))
       const progress = mouseX / (progressBar.offsetWidth / 100)
       videoPlayer.currentTime = videoPlayer.duration * (progress / 100)
     }
-
-    videoPlayer.addEventListener('timeupdate', videoProgress)
-    progressBar.addEventListener('click', videoChangeTime)
 
     function videoChangeVolume () {
       const volume = volumeScale.value / 100
@@ -260,6 +253,10 @@ window.onload = function () {
       isFullScreenVideo = !isFullScreenVideo
     }
 
+    videoPlayer.addEventListener('timeupdate', videoProgress)
+    progressBar.addEventListener('click', videoChangeTime)
+    actionButtons.forEach(x => x.addEventListener('click', videoAct))
+    videoPlayer.addEventListener('click', videoAct)
     muteButton.addEventListener('click', videoMute)
     volumeScale.addEventListener('change', videoChangeVolume)
     speedSelect.addEventListener('change', videoChangeSpeed)
@@ -267,5 +264,6 @@ window.onload = function () {
     fullScreenButton.addEventListener('click', videoChangeScreen)
   }
 
+  const userVideoPlayers = document.querySelectorAll('.video-player')
   userVideoPlayers.forEach(player => createCustomVideoPlayer(player))
 }
