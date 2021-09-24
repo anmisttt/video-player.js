@@ -2,6 +2,20 @@
 
 Библиотека для добавления видео на ваши веб-сайты.
 
+Видео плеер имеет следующие функции:  
+            1. Кнопка play/pause  
+            2. Счетчик прошедшего времени  
+            3. Временная шкала видео  
+            4. Индикатор длительность видео  
+            5. Кнопка mute  
+            6. Шкала громкости  
+            7. Выбор скорости  
+            8. Выбор качества видео  
+            9. Кнопка скачивания  
+            10. Кнопка вывода на полный экран  
+ 
+
+
 [Посмотреть на работу плеера](https://anmisttt.github.io/video-player.js/)
 
 
@@ -11,13 +25,13 @@
 
 #### 1 - Скачать файлы скрипта и стилей
 
-Загрузите [script.min.js](https://github.com/anmisttt/video-player.js/blob/7008021eebe4e4af51856d4c4ead93625dadfb2d/index.js) и вставьте в теге `script` у себя на странице.
+Загрузите [script.min.js](https://github.com/anmisttt/video-player.js/blob/bea0457a07bb159e14eec9399052a7c2de033b12/dist/script.min.js) и вставьте в теге `script` у себя на странице.
 
 ```html
 <script src="path/script.min.js"></script>
 ```
 
-Загрузите [style.min.css](https://github.com/anmisttt/video-player.js/blob/7008021eebe4e4af51856d4c4ead93625dadfb2d/index.js) и вставьте в теге `link` у себя на странице.
+Загрузите [style.min.css](https://github.com/anmisttt/video-player.js/blob/bea0457a07bb159e14eec9399052a7c2de033b12/dist/style.min.css) и вставьте в теге `link` у себя на странице.
 
 ```html
 <link href="path/style.min.css" rel="stylesheet"/>
