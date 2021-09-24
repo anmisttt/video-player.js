@@ -1,4 +1,3 @@
-
 window.onload = function () {
   const userVideoPlayers = document.querySelectorAll('.video-player')
 
@@ -91,19 +90,19 @@ window.onload = function () {
 
     const createSourcesTemplate = function () {
       return (
-      `${qualityObject[videoQuality].length > 0
+      `<video id='video-player' poster='${userVideoPlayer.poster}' ${userVideoPlayer.loop ? 'loop' : ''} ${userVideoPlayer.muted ? 'muted' : ''}>
+      ${qualityObject[videoQuality].length > 0
         ? qualityObject[videoQuality].map(x =>
         `<source src="${x.attributes.src.value}" type="${x.attributes.type.value}"></source>`
        ).join('')
-      : ''}`
+      : ''}
+      </video>`
       )
     }
 
     const createVideoPlayerTemplate = function () {
       return (
-    `<video id='video-player' poster='${userVideoPlayer.poster}' ${userVideoPlayer.muted ? 'muted' : ''} ${userVideoPlayer.loop ? 'loop' : ''}>
-       ${createSourcesTemplate()}
-        </video>
+    `${createSourcesTemplate()}   
     <div class='video-controls__element video-controls__action play main' id='video-controls__action'></div>
       <div class='video-controls'>
         <div class='video-controls__element video-controls__action play' id='video-controls__action'></div>
@@ -179,6 +178,17 @@ window.onload = function () {
     actionButtons.forEach(x => x.addEventListener('click', videoAct))
     videoPlayer.addEventListener('click', videoAct)
 
+    function getOffsetLeft (elem) {
+      let left = 0
+
+      while (elem) {
+        left = left + parseInt(elem.offsetLeft)
+        elem = elem.offsetParent
+      }
+
+      return left
+    }
+
     function videoTime (time) {
       time = Math.floor(time)
       const minutes = Math.floor(time / 60)
@@ -200,7 +210,8 @@ window.onload = function () {
       currTime.innerHTML = videoTime(videoPlayer.currentTime)
     }
     function videoChangeTime (e) {
-      const mouseX = Math.floor(e.pageX - progressBar.offsetLeft)
+      const mouseX = Math.floor(e.pageX - getOffsetLeft(progressBar))
+      console.log(getOffsetLeft(progressBar))
       const progress = mouseX / (progressBar.offsetWidth / 100)
       videoPlayer.currentTime = videoPlayer.duration * (progress / 100)
     }
