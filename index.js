@@ -88,25 +88,26 @@ window.onload = function () {
 
     const createSourcesTemplate = function () {
       return (
-      `<video id='video-player' poster='${userVideoPlayer.poster}' ${userVideoPlayer.loop ? 'loop' : ''} ${userVideoPlayer.muted ? 'muted' : ''}>
-      ${qualityObject[videoQuality].length > 0
+      `${qualityObject[videoQuality].length > 0
         ? qualityObject[videoQuality].map(x =>
         `<source src="${x.attributes.src.value}" type="${x.attributes.type.value}"></source>`
        ).join('')
       : ''}
-      </video>`
+      `
       )
     }
 
-    const createVideoPlayerTemplate = function () {
+    const createVideoPlayerTemplate = function (currentTime, duration) {
       return (
-    `${createSourcesTemplate()}   
+    `<video id='video-player' poster='${userVideoPlayer.poster}' ${userVideoPlayer.loop ? 'loop' : ''} ${userVideoPlayer.muted ? 'muted' : ''}>
+    ${createSourcesTemplate()}   
+    </video>
     <div class='video-controls__element video-controls__action play main' id='video-controls__action'></div>
       <div class='video-controls'>
         <div class='video-controls__element video-controls__action play' id='video-controls__action'></div>
-        <div class='video-controls__element video-controls__curr-time' id='video-controls__curr-time'>00:00</div>
+        <div class='video-controls__element video-controls__curr-time' id='video-controls__curr-time'>${currentTime && (/\d\d:\d\d/).test(currentTime) ? currentTime : '00:00'}</div>
         <progress value='0' max='100' class='video-controls__element video-controls__progress-bar' id='video-controls__progress-bar'></progress>
-        <div class='video-controls__element video-controls__duration' id='video-controls__duration'>00:00</div>
+        <div class='video-controls__element video-controls__duration' id='video-controls__duration'>${duration && (/\d\d:\d\d/).test(duration) ? duration : '00:00'}</div>
         <div class='video-controls__element video-controls__mute video-controls__mute_false' id='video-controls__mute'>
         ${createSoundTemplate()}
         </div>
@@ -132,7 +133,6 @@ window.onload = function () {
     }
 
     const videoContainer = document.createElement('div')
-    videoContainer.innerHTML = createVideoPlayerTemplate()
     videoContainer.classList.add('video-container')
     if (userVideoPlayer.width > 0) {
       videoContainer.style.width = userVideoPlayer.width + 'px'
@@ -143,18 +143,7 @@ window.onload = function () {
     userVideoPlayer.insertAdjacentElement('beforebegin', videoContainer)
     parentElement.removeChild(userVideoPlayer)
 
-    const videoPlayer = document.getElementsByTagName('video')[0]
-    const progressBar = document.getElementById('video-controls__progress-bar')
-    const currTime = document.getElementById('video-controls__curr-time')
-    const durationTime = document.getElementById('video-controls__duration')
-    const actionButtons = document.querySelectorAll('.video-controls__action')
-    const muteButton = document.getElementById('video-controls__mute')
-    const volumeScale = document.getElementById('video-controls__volume')
-    const speedSelect = document.getElementById('video-controls__speed')
-    const qualitySelect = document.getElementById('video-controls__quality')
-    const fullScreenButton = document.getElementById('video-controls__full-screen')
-
-    function videoAct () {
+    function videoAct (videoPlayer, actionButtons, durationInput, duration) {
       if (videoPlayer.paused) {
         videoPlayer.play()
         actionButtons.forEach(x => {
@@ -168,9 +157,7 @@ window.onload = function () {
           x.classList.remove('pause')
         })
       }
-      if (durationTime.innerHTML === '00:00') {
-        durationTime.innerHTML = videoTime(videoPlayer.duration)
-      }
+      durationInput.innerHTML = videoTime(duration || videoPlayer.duration)
     }
 
     function getOffsetLeft (elem) {
@@ -199,20 +186,19 @@ window.onload = function () {
       return minutesVal + ':' + secondsVal
     }
 
-    function videoProgress () {
+    function videoProgress (videoPlayer, progressBar, currentTimeInput) {
       const progress = (Math.floor(videoPlayer.currentTime) / (Math.floor(videoPlayer.duration) / 100))
-      progressBar.value = progress
-      currTime.innerHTML = videoTime(videoPlayer.currentTime)
+      progressBar.value = progress || 0
+      currentTimeInput.innerHTML = videoTime(videoPlayer.currentTime)
     }
 
-    function videoChangeTime (e) {
+    function videoChangeTime (e, progressBar, videoPlayer) {
       const mouseX = Math.floor(e.pageX - getOffsetLeft(progressBar))
-      console.log(getOffsetLeft(progressBar))
       const progress = mouseX / (progressBar.offsetWidth / 100)
       videoPlayer.currentTime = videoPlayer.duration * (progress / 100)
     }
 
-    function videoChangeVolume () {
+    function videoChangeVolume (volumeScale, videoPlayer, muteButton) {
       const volume = volumeScale.value / 100
       videoPlayer.volume = volume
       if (videoPlayer.volume === 0) {
@@ -222,7 +208,7 @@ window.onload = function () {
       }
     }
 
-    function videoMute () {
+    function videoMute (videoPlayer, volumeScale, muteButton) {
       if (videoPlayer.volume === 0) {
         videoPlayer.volume = volumeScale.value / 100
         muteButton.setAttribute('class', 'video-controls__element video-controls__mute video-controls__mute_false')
@@ -232,17 +218,18 @@ window.onload = function () {
       }
     }
 
-    function videoChangeSpeed () {
+    function videoChangeSpeed (speedSelect, videoPlayer) {
       const speed = speedSelect.value / 100
       videoPlayer.playbackRate = speed
     }
 
-    function videoChangeQuality () {
+    function videoChangeQuality (qualitySelect, videoPlayer) {
       videoQuality = qualitySelect.value
-      videoPlayer.innerHTML = createSourcesTemplate()
+      videoContainer.innerHTML = createVideoPlayerTemplate()
+      addListeners(videoPlayer.currentTime, videoPlayer.duration, !videoPlayer.paused)
     }
 
-    function videoChangeScreen () {
+    function videoChangeScreen (fullScreenButton) {
       if (isFullScreenVideo) {
         videoContainer.classList.remove('video-container__full-screen')
         fullScreenButton.classList.remove('small-screen')
@@ -253,15 +240,42 @@ window.onload = function () {
       isFullScreenVideo = !isFullScreenVideo
     }
 
-    videoPlayer.addEventListener('timeupdate', videoProgress)
-    progressBar.addEventListener('click', videoChangeTime)
-    actionButtons.forEach(x => x.addEventListener('click', videoAct))
-    videoPlayer.addEventListener('click', videoAct)
-    muteButton.addEventListener('click', videoMute)
-    volumeScale.addEventListener('change', videoChangeVolume)
-    speedSelect.addEventListener('change', videoChangeSpeed)
-    qualitySelect.addEventListener('change', videoChangeQuality)
-    fullScreenButton.addEventListener('click', videoChangeScreen)
+    function addListeners (currentTime, duration, playing) {
+      videoContainer.innerHTML = createVideoPlayerTemplate(videoTime(currentTime), videoTime(duration))
+
+      const videoPlayer = document.getElementsByTagName('video')[0]
+      const progressBar = document.getElementById('video-controls__progress-bar')
+      const currentTimeInput = document.getElementById('video-controls__curr-time')
+      const durationInput = document.getElementById('video-controls__duration')
+      const actionButtons = document.querySelectorAll('.video-controls__action')
+      const muteButton = document.getElementById('video-controls__mute')
+      const volumeScale = document.getElementById('video-controls__volume')
+      const speedSelect = document.getElementById('video-controls__speed')
+      const qualitySelect = document.getElementById('video-controls__quality')
+      const fullScreenButton = document.getElementById('video-controls__full-screen')
+
+      videoPlayer.addEventListener('timeupdate', () => videoProgress(videoPlayer, progressBar, currentTimeInput))
+      progressBar.addEventListener('click', (e) => videoChangeTime(e, progressBar, videoPlayer))
+      actionButtons.forEach(x => x.addEventListener('click', () => videoAct(videoPlayer, actionButtons, durationInput)))
+      videoPlayer.addEventListener('click', () => videoAct(videoPlayer, actionButtons, durationInput))
+      muteButton.addEventListener('click', () => videoMute(videoPlayer, volumeScale, muteButton))
+      volumeScale.addEventListener('change', () => videoChangeVolume(volumeScale, videoPlayer, muteButton))
+      speedSelect.addEventListener('change', () => videoChangeSpeed(speedSelect, videoPlayer))
+      qualitySelect.addEventListener('change', () => videoChangeQuality(qualitySelect, videoPlayer))
+      fullScreenButton.addEventListener('click', () => videoChangeScreen(fullScreenButton))
+
+      if (currentTime) {
+        videoPlayer.currentTime = currentTime
+      }
+      if (duration) {
+        videoPlayer.duration = duration
+      }
+
+      videoProgress(videoPlayer, progressBar, currentTimeInput)
+      playing && videoAct(videoPlayer, actionButtons, durationInput, duration)
+    }
+
+    addListeners()
   }
 
   const userVideoPlayers = document.querySelectorAll('.video-player')
